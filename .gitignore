@@ -7,14 +7,30 @@
 .yarn/install-state.gz
 .env.development
 .env.production
-passwordUtils.js
+.firebaserc
+.eslintrc.json
+firebase.json
+firebaseConfig.js
+firestore.indexes.json
+firestore.rules
+hashPassword.js
+next.config.js
+package-lock.json
+package.json
+postcss.config.js
+tailwind.config.ts
+tsconfig.json
 
 # testing
 /coverage
 
+
 # next.js
 /.next/
 /out/
+/.firebase
+/public
+/utils
 
 # production
 /build
