@@ -25,9 +25,9 @@ tailwind.config.ts
 # next.js
 /.next/
 /out/
-/.firebase
-/public
-/utils
+/.firebase/
+/public/
+/utils/
 
 # production
 /build
