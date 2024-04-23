@@ -1,15 +1,15 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface StackState {
-  unit: Unit;
-}
+// interface StackState {
+//   unit: Unit;
+// }
 
-interface Unit {
+interface StackState {
   id: number;
   name: string;
   category: string;
   amount: number;
-  level: Levels[];
+  levels: Levels[];
 }
 
 interface Levels {
@@ -68,42 +68,94 @@ interface Upkeep {
   rares: number;
 }
 
+const initialState = {
+  stack: [] as StackState[],
+};
+
 const stackSlice = createSlice({
   name: "stack",
-  initialState: {
-    stack: [] as StackState[],
-  },
+  initialState,
   reducers: {
     addBasicToStack: (state, action: PayloadAction<any>) => {
-      state.stack.push(action.payload);
+      const newStack = {
+        id: action.payload.id,
+        name: action.payload.name,
+        category: action.payload.category,
+        amount: 1,
+        levels: action.payload.levels,
+      };
+      state.stack.push(newStack);
     },
-    addFullToStack: (state, action) => {
-      const fullUnit: Unit = action.payload;
-      const index = state.stack.findIndex(
-        (stackItem) => stackItem.unit.id === fullUnit.id
-      );
-      if (index !== -1) {
-        state.stack[index].unit = action.payload;
-      } else {
-        state.stack.push(action.payload);
-      }
+    addFullToStack: (state, action: PayloadAction<any>) => {
+      const fullUnit = action.payload;
+      // console.log("fullUnit: ", fullUnit);
+      fullUnit.forEach((unit: any) => {
+        const i = unit.level.cow_unit_id;
+        // console.log("i: ", i);
+        const index = state.stack.findIndex((stackItem) => stackItem.id === i);
+        // console.log("stored id: ", index);
+        // console.log("index: ", index);
+        // console.log("stored id: ", state.stack.id);
+        if (index >= 0) {
+          const levelIndex = state.stack[index].levels.findIndex(
+            (level) => level.id === unit.level.cow_level_id
+          );
+          if (levelIndex === -1) {
+            const updatedStack = {
+              id: unit.level.cow_level_id,
+              level: unit.level.level,
+              hp: unit.level.hp,
+              attack: unit.attackData,
+              defense: unit.defenseData,
+              cost: unit.costData,
+              upkeep: unit.upkeepData,
+            };
+            state.stack[index].levels.push(updatedStack);
+          } else {
+            // state.stack.push(action.payload);
+            return;
+          }
+        }
+      });
     },
-    removeFromStack: (state, action) => {
+    removeFromStack: (state, action: PayloadAction<any>) => {
       const index = state.stack.findIndex(
-        (stackItem) => stackItem.unit?.id === action.payload.id
+        (stackItem) => stackItem.id === action.payload
       );
       if (index >= 0) {
         state.stack.splice(index, 1);
       } else {
         console.warn(
-          `can't Remove Unit (id: ${action.payload.id} as it is not in the Stack)`
+          `can't Remove Unit (id: ${action.payload} as it is not in the Stack)`
         );
       }
     },
+    increaseAmount: (state, action: PayloadAction<number>) => {
+      const id = action.payload;
+      const index = state.stack.findIndex((unit) => unit.id === id);
+      if (index !== -1) {
+        state.stack[index].amount += 1;
+        // console.log("success");
+      }
+    },
+    decreaseAmount: (state, action: PayloadAction<number>) => {
+      const id = action.payload;
+      const index = state.stack.findIndex((unit) => unit.id === id);
+      if (index !== -1 && state.stack[index].amount > 1) {
+        state.stack[index].amount -= 1;
+      }
+    },
+    resetStack: () => initialState,
   },
 });
 
-export const { addBasicToStack, addFullToStack, removeFromStack } =
-  stackSlice.actions;
+export const {
+  addBasicToStack,
+  addFullToStack,
+  removeFromStack,
+  increaseAmount,
+  decreaseAmount,
+  resetStack,
+} = stackSlice.actions;
 
 export default stackSlice.reducer;

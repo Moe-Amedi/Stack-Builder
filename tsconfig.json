@@ -27,7 +27,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "libs/mongodb.js"
+    "libs/dbConnect.js"
   ],
   "exclude": ["node_modules"]
 }

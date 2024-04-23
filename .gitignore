@@ -5,6 +5,9 @@
 /.pnp
 .pnp.js
 .yarn/install-state.gz
+.env.development
+.env.production
+passwordUtils.js
 
 # testing
 /coverage
