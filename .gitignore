@@ -50,21 +50,3 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-
-
-# Ignore all
-/node_modules
-/.firebase
-/.next
-.env.development
-.env.production
-.firebaserc
-.eslintrc.json
-firebase.json
-firebaseConfig.js
-firestore.indexes.json
-firestore.rules
-hashPassword.js
-next.config.js
-postcss.config.js
-tailwind.config.ts
