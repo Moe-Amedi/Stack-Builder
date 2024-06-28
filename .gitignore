@@ -43,11 +43,11 @@ next-env.d.ts
 
 .firebaserc
 .eslintrc
-firebase.json
-firebaseConfig.js
-firestore.indexes.json
-firestore.rules
-hashPassword.js
-next.config.js
-postcss.config.js
-tailwind.config.ts
+firebase
+firebaseConfig
+firestore.indexes
+firestore
+hashPassword
+next.config
+postcss.config
+tailwind.config
