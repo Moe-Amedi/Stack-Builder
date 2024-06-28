@@ -41,13 +41,14 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+.gitignore
 .firebaserc
 .eslintrc.json
-firebase
-firebaseConfig
-firestore.indexes
-firestore
-hashPassword
-next.config
-postcss.config
-tailwind.config
+firebase.json
+firebaseConfig.js
+firestore.indexes.json
+firestore.rules
+hashPassword.js
+next.config.js
+postcss.config.js
+tailwind.config.js
