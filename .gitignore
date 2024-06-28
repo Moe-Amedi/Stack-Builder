@@ -11,9 +11,7 @@
 
 
 # next.js
-/.next/
 /out/
-/.firebase/
 /public/
 /utils/
 
@@ -31,6 +29,8 @@ yarn-error.log*
 
 # local env files
 .env*.local
+.env.development
+.env.production
 
 # vercel
 .vercel
@@ -39,8 +39,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-.env.development
-.env.production
 .firebaserc
 .eslintrc
 firebase.json

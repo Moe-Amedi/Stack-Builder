@@ -1,0 +1,110 @@
+{
+  "pages": {
+    "/_not-found": [
+      "static/chunks/webpack-aad7cc9027ac1dbf.js",
+      "static/chunks/fd9d1056-516b58327fb05db5.js",
+      "static/chunks/938-70be039c1f32b59d.js",
+      "static/chunks/main-app-8a65ab1b5185178e.js",
+      "static/chunks/app/_not-found-352713f74bf9de0e.js"
+    ],
+    "/layout": [
+      "static/chunks/webpack-aad7cc9027ac1dbf.js",
+      "static/chunks/fd9d1056-516b58327fb05db5.js",
+      "static/chunks/938-70be039c1f32b59d.js",
+      "static/chunks/main-app-8a65ab1b5185178e.js",
+      "static/chunks/262-4e812f5fa8f90bce.js",
+      "static/css/a169dc663731ad04.css",
+      "static/chunks/app/layout-b037edc83b34f0f8.js"
+    ],
+    "/CallOfWar/allies/page": [
+      "static/chunks/webpack-aad7cc9027ac1dbf.js",
+      "static/chunks/fd9d1056-516b58327fb05db5.js",
+      "static/chunks/938-70be039c1f32b59d.js",
+      "static/chunks/main-app-8a65ab1b5185178e.js",
+      "static/chunks/176-ea3a580ccb69630f.js",
+      "static/chunks/262-4e812f5fa8f90bce.js",
+      "static/chunks/app/CallOfWar/allies/page-e1079aad7d7aa272.js"
+    ],
+    "/CallOfWar/page": [
+      "static/chunks/webpack-aad7cc9027ac1dbf.js",
+      "static/chunks/fd9d1056-516b58327fb05db5.js",
+      "static/chunks/938-70be039c1f32b59d.js",
+      "static/chunks/main-app-8a65ab1b5185178e.js",
+      "static/chunks/176-ea3a580ccb69630f.js",
+      "static/chunks/691-988b3e718ad26b8e.js",
+      "static/chunks/app/CallOfWar/page-1ad6398dff45e5ab.js"
+    ],
+    "/CallOfWar/axis/page": [
+      "static/chunks/webpack-aad7cc9027ac1dbf.js",
+      "static/chunks/fd9d1056-516b58327fb05db5.js",
+      "static/chunks/938-70be039c1f32b59d.js",
+      "static/chunks/main-app-8a65ab1b5185178e.js",
+      "static/chunks/176-ea3a580ccb69630f.js",
+      "static/chunks/262-4e812f5fa8f90bce.js",
+      "static/chunks/app/CallOfWar/axis/page-f06afc4ebbe1113f.js"
+    ],
+    "/CallOfWar/pan-asian/page": [
+      "static/chunks/webpack-aad7cc9027ac1dbf.js",
+      "static/chunks/fd9d1056-516b58327fb05db5.js",
+      "static/chunks/938-70be039c1f32b59d.js",
+      "static/chunks/main-app-8a65ab1b5185178e.js",
+      "static/chunks/176-ea3a580ccb69630f.js",
+      "static/chunks/262-4e812f5fa8f90bce.js",
+      "static/chunks/app/CallOfWar/pan-asian/page-f1c79a57ca57961e.js"
+    ],
+    "/CallOfWar/comintern/page": [
+      "static/chunks/webpack-aad7cc9027ac1dbf.js",
+      "static/chunks/fd9d1056-516b58327fb05db5.js",
+      "static/chunks/938-70be039c1f32b59d.js",
+      "static/chunks/main-app-8a65ab1b5185178e.js",
+      "static/chunks/176-ea3a580ccb69630f.js",
+      "static/chunks/262-4e812f5fa8f90bce.js",
+      "static/chunks/app/CallOfWar/comintern/page-2f117f2c8a333cd4.js"
+    ],
+    "/ConflictOfNations/eastern/page": [
+      "static/chunks/webpack-aad7cc9027ac1dbf.js",
+      "static/chunks/fd9d1056-516b58327fb05db5.js",
+      "static/chunks/938-70be039c1f32b59d.js",
+      "static/chunks/main-app-8a65ab1b5185178e.js",
+      "static/chunks/176-ea3a580ccb69630f.js",
+      "static/chunks/262-4e812f5fa8f90bce.js",
+      "static/chunks/app/ConflictOfNations/eastern/page-67bc32e6d2a41df8.js"
+    ],
+    "/ConflictOfNations/page": [
+      "static/chunks/webpack-aad7cc9027ac1dbf.js",
+      "static/chunks/fd9d1056-516b58327fb05db5.js",
+      "static/chunks/938-70be039c1f32b59d.js",
+      "static/chunks/main-app-8a65ab1b5185178e.js",
+      "static/chunks/176-ea3a580ccb69630f.js",
+      "static/chunks/691-988b3e718ad26b8e.js",
+      "static/chunks/app/ConflictOfNations/page-d1acc5e5eaf758b5.js"
+    ],
+    "/ConflictOfNations/european/page": [
+      "static/chunks/webpack-aad7cc9027ac1dbf.js",
+      "static/chunks/fd9d1056-516b58327fb05db5.js",
+      "static/chunks/938-70be039c1f32b59d.js",
+      "static/chunks/main-app-8a65ab1b5185178e.js",
+      "static/chunks/176-ea3a580ccb69630f.js",
+      "static/chunks/262-4e812f5fa8f90bce.js",
+      "static/chunks/app/ConflictOfNations/european/page-72f8c3985fc78d52.js"
+    ],
+    "/ConflictOfNations/western/page": [
+      "static/chunks/webpack-aad7cc9027ac1dbf.js",
+      "static/chunks/fd9d1056-516b58327fb05db5.js",
+      "static/chunks/938-70be039c1f32b59d.js",
+      "static/chunks/main-app-8a65ab1b5185178e.js",
+      "static/chunks/176-ea3a580ccb69630f.js",
+      "static/chunks/262-4e812f5fa8f90bce.js",
+      "static/chunks/app/ConflictOfNations/western/page-43c27038ad7b6c25.js"
+    ],
+    "/page": [
+      "static/chunks/webpack-aad7cc9027ac1dbf.js",
+      "static/chunks/fd9d1056-516b58327fb05db5.js",
+      "static/chunks/938-70be039c1f32b59d.js",
+      "static/chunks/main-app-8a65ab1b5185178e.js",
+      "static/chunks/176-ea3a580ccb69630f.js",
+      "static/chunks/691-988b3e718ad26b8e.js",
+      "static/chunks/app/page-c676178d3d68c2b7.js"
+    ]
+  }
+}

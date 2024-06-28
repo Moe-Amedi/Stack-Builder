@@ -1,0 +1,21 @@
+{
+  "/_not-found": "app/_not-found.js",
+  "/CallOfWar/allies/page": "app/CallOfWar/allies/page.js",
+  "/CallOfWar/page": "app/CallOfWar/page.js",
+  "/CallOfWar/axis/page": "app/CallOfWar/axis/page.js",
+  "/CallOfWar/pan-asian/page": "app/CallOfWar/pan-asian/page.js",
+  "/CallOfWar/comintern/page": "app/CallOfWar/comintern/page.js",
+  "/ConflictOfNations/eastern/page": "app/ConflictOfNations/eastern/page.js",
+  "/ConflictOfNations/page": "app/ConflictOfNations/page.js",
+  "/ConflictOfNations/european/page": "app/ConflictOfNations/european/page.js",
+  "/ConflictOfNations/western/page": "app/ConflictOfNations/western/page.js",
+  "/api/callofwar/allies/route": "app/api/callofwar/allies/route.js",
+  "/api/callofwar/asia/route": "app/api/callofwar/asia/route.js",
+  "/api/callofwar/axis/route": "app/api/callofwar/axis/route.js",
+  "/api/conflict/eastern/route": "app/api/conflict/eastern/route.js",
+  "/api/conflict/european/route": "app/api/conflict/european/route.js",
+  "/api/conflict/western/route": "app/api/conflict/western/route.js",
+  "/api/callofwar/soviet/route": "app/api/callofwar/soviet/route.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/page": "app/page.js"
+}
