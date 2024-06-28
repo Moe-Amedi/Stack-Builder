@@ -3,11 +3,11 @@ import {
   decreaseAmount,
   increaseAmount,
   removeFromStack,
-} from "../redux/stack/stackSlice";
-import { removeData } from "../redux/dataStack/dataSlice";
+} from "../../redux/stack/stackSlice";
+import { removeData } from "../../redux/dataStack/dataSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useHandler } from "./handler";
-import { RootState } from "../redux/store";
+import { RootState } from "../../redux/store";
 
 const UnitCard = (props: any) => {
   const { handleFetchunit, handleAddToStack, handleAddToData } = useHandler();
@@ -61,7 +61,7 @@ const UnitCard = (props: any) => {
     });
     switch (direction) {
       case "increase":
-        if (counter < 10) {
+        if (counter < 100) {
           dispatch(increaseAmount(id));
         }
         break;

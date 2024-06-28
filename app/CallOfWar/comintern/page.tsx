@@ -1,6 +1,6 @@
 "use client";
-import UnitCard from "@/app/components/UnitCard";
-import React, { useEffect } from "react";
+import UnitCard from "@/app/components/CallOfWar/UnitCard";
+import React, { useEffect, useState } from "react";
 import { useHandler } from "./handler";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/app/redux/store";
@@ -26,6 +26,8 @@ const Page = () => {
     handleAddUnit,
     handleStackLength,
     handleData,
+    handleProdTime,
+    formatTime,
     units,
     length,
     attack,
@@ -33,11 +35,28 @@ const Page = () => {
     cost,
     upkeep,
     hp,
+    prodTime,
   } = useHandler();
   const menuUnits = handleUnitMenu(units);
   const Stack = useSelector((state: RootState) => state.stack.stack);
   const dataStack = useSelector((state: RootState) => state.data.data);
   const dispatch = useDispatch();
+  const [ProductionPerHour, setProductionPerHour] = useState({
+    id: 0,
+    cash: 0,
+    food: 0,
+    goods: 0,
+    manpower: 0,
+    metal: 0,
+    oil: 0,
+    rares: 0,
+  });
+
+  const handleInputChange = (e: any, resource: string) => {
+    const { value } = e.target;
+    setProductionPerHour((prevState) => ({ ...prevState, [resource]: value }));
+    console.log(ProductionPerHour);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -59,6 +78,16 @@ const Page = () => {
   useEffect(() => {
     handleData();
   }, [dataStack]);
+
+  useEffect(() => {
+    handleProdTime(ProductionPerHour.cash, "cash");
+    handleProdTime(ProductionPerHour.food, "food");
+    handleProdTime(ProductionPerHour.goods, "goods");
+    handleProdTime(ProductionPerHour.manpower, "manpower");
+    handleProdTime(ProductionPerHour.metal, "metal");
+    handleProdTime(ProductionPerHour.oil, "oil");
+    handleProdTime(ProductionPerHour.rares, "rares");
+  }, [cost, ProductionPerHour]);
   return (
     <div
       className="flex flex-col h-full bg-fixed bg-origin-border bg-bottom bg-no-repeat bg-cover"
@@ -66,8 +95,28 @@ const Page = () => {
         backgroundImage: 'url("/images/ww2-soviet.png")',
       }}
     >
+      <div className="navbar bg-slate-700 fixed top-0 z-10 shadow-xl">
+        <div className="flex-1">
+          <a className="btn btn-ghost bg-slate-800" href="/CallOfWar">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
       <div className="grid w-full h-full justify-items-center">
-        <div className=" w-3/5 bg-slate-700 rounded-lg p-2 m-2 text-xs">
+        <div className=" w-3/5 bg-slate-700 rounded-lg p-2 m-2 text-xs shadow-2xl shadow-gray-900 mt-20">
           <table className="w-full border border-white bg-slate-600 table-fixed mb-2 rounded-lg">
             <thead>
               <tr>
@@ -267,7 +316,7 @@ const Page = () => {
               </tr>
             </tbody>
           </table>
-          {/* <h1 className="text-sm">
+          <h1 className="text-sm">
             Insert your resource production per hour to calculate how long it
             will take to gather the required resources for the below stacks
           </h1>
@@ -305,51 +354,65 @@ const Page = () => {
                 </td>
                 <td className="border border-white p-1 text-center align-middle">
                   <input
-                    type="number"
+                    type="text"
+                    inputMode="numeric"
                     step="0.1"
-                    className="input input-bordered w-full h-8 max-w-xs"
+                    className="input input-bordered w-full h-8 max-w-xs bg-slate-900"
+                    onChange={(e) => handleInputChange(e, "cash")}
                   />
                 </td>
                 <td className="border border-white p-1 text-center align-middle">
                   <input
-                    type="number"
+                    type="text"
+                    inputMode="numeric"
                     step="0.1"
-                    className="input input-bordered w-full h-8 max-w-xs"
+                    className="input input-bordered w-full h-8 max-w-xs bg-slate-900"
+                    onChange={(e) => handleInputChange(e, "food")}
                   />
                 </td>
                 <td className="border border-white p-1 text-center align-middle">
                   <input
-                    type="number"
+                    type="text"
+                    inputMode="numeric"
                     step="0.1"
-                    className="input input-bordered w-full h-8 max-w-xs"
+                    className="input input-bordered w-full h-8 max-w-xs bg-slate-900"
+                    onChange={(e) => handleInputChange(e, "goods")}
                   />
                 </td>
                 <td className="border border-white p-1 text-center align-middle">
                   <input
-                    type="number"
+                    type="text"
+                    inputMode="numeric"
                     step="0.1"
-                    className="input input-bordered w-full h-8 max-w-xs"
+                    className="input input-bordered w-full h-8 max-w-xs bg-slate-900"
+                    onChange={(e) => handleInputChange(e, "manpower")}
                   />
                 </td>
                 <td className="border border-white p-1 text-center align-middle">
                   <input
-                    type="number"
+                    type="text"
+                    inputMode="numeric"
                     step="0.1"
-                    className="input input-bordered w-full h-8 max-w-xs"
+                    className="input input-bordered w-full h-8 max-w-xs bg-slate-900"
+                    onChange={(e) => handleInputChange(e, "metal")}
                   />
                 </td>
                 <td className="border border-white p-1 text-center align-middle">
                   <input
-                    type="number"
+                    type="text"
+                    inputMode="numeric"
                     step="0.1"
-                    className="input input-bordered w-full h-8 max-w-xs"
+                    className="input input-bordered w-full h-8 max-w-xs bg-slate-900"
+                    onChange={(e) => handleInputChange(e, "oil")}
                   />
                 </td>
                 <td className="border border-white p-1 text-center align-middle">
                   <input
-                    type="number"
+                    type="text"
+                    inputMode="numeric"
                     step="0.1"
-                    className="input input-bordered w-full h-8 max-w-xs"
+                    className="input input-bordered w-full h-8 max-w-xs bg-slate-900"
+                    onChange={(e) => handleInputChange(e, "rares")}
                   />
                 </td>
               </tr>
@@ -358,31 +421,31 @@ const Page = () => {
                   Time to Gather
                 </td>
                 <td className="border border-white p-1 text-center align-middle">
-                  0
+                  {formatTime(prodTime.cash) || 0}
                 </td>
                 <td className="border border-white p-1 text-center align-middle">
-                  0
+                  {formatTime(prodTime.food) || 0}
                 </td>
                 <td className="border border-white p-1 text-center align-middle">
-                  0
+                  {formatTime(prodTime.goods) || 0}
                 </td>
                 <td className="border border-white p-1 text-center align-middle">
-                  0
+                  {formatTime(prodTime.manpower) || 0}
                 </td>
                 <td className="border border-white p-1 text-center align-middle">
-                  0
+                  {formatTime(prodTime.metal) || 0}
                 </td>
                 <td className="border border-white p-1 text-center align-middle">
-                  0
+                  {formatTime(prodTime.oil) || 0}
                 </td>
                 <td className="border border-white p-1 text-center align-middle">
-                  0
+                  {formatTime(prodTime.rares) || 0}
                 </td>
               </tr>
             </tbody>
-          </table> */}
+          </table>
         </div>
-        <div className="w-3/5 min-h-screen bg-slate-700 rounded-lg p-2 m-2 ">
+        <div className="w-3/5 min-h-screen bg-slate-700 rounded-lg p-2 m-2 mt-4 shadow-2xl shadow-gray-900">
           <div className="flex justify-between">
             <div className="dropdown justify-start p-2 mb-2">
               <div
@@ -423,7 +486,7 @@ const Page = () => {
             <div className="flex justify-end items-center">
               <div className="flex p-4">
                 <h2 className="px-1">Stack:</h2>
-                <h2>{length.toString()}/10</h2>
+                <h2>{length.toString()}/100</h2>
               </div>
             </div>
           </div>

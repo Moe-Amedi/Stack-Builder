@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const Page = () => {
   const [hovered, setHovered] = useState(0);
@@ -11,7 +12,27 @@ const Page = () => {
         backgroundImage: 'url("/images/ww2-bg.png")',
       }}
     >
-      <div className="px-10 pt-10 pb-2 text-center w-full ">
+      <div className="navbar bg-slate-700 fixed top-0 z-30 shadow-xl">
+        <div className="flex-1">
+          <a className="btn btn-ghost bg-slate-800" href="/">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+      <div className="px-10 pt-10 pb-2 text-center w-full mt-12 ">
         <h1 className=" text-3xl">Choose Your Doctrine</h1>
       </div>
       <div className="flex h-screen mx-10">
@@ -24,9 +45,12 @@ const Page = () => {
             onMouseLeave={() => setHovered(0)}
           >
             <h1 className=" p-5 text-3xl">Axis</h1>
-            <img
+            <Image
               className=" w-full h-full rounded object-fit hover:shadow-2xl"
               src="/images/cow-axis.png"
+              width={1}
+              height={1}
+              alt=""
             />
           </div>
         </Link>
@@ -39,9 +63,12 @@ const Page = () => {
             onMouseLeave={() => setHovered(0)}
           >
             <h1 className=" p-5 text-3xl">Allies</h1>
-            <img
+            <Image
               className=" w-full h-full rounded object-fit hover:shadow-2xl"
               src="/images/cow-allies.png"
+              width={1}
+              height={1}
+              alt=""
             />
           </div>
         </Link>
@@ -54,9 +81,12 @@ const Page = () => {
             onMouseLeave={() => setHovered(0)}
           >
             <h1 className=" p-5 text-3xl">Comintern</h1>
-            <img
+            <Image
               className=" w-full h-full rounded object-fit hover:shadow-2xl"
               src="/images/cow-soviet.png"
+              width={1}
+              height={1}
+              alt=""
             />
           </div>
         </Link>
@@ -69,19 +99,24 @@ const Page = () => {
             onMouseLeave={() => setHovered(0)}
           >
             <h1 className=" p-5 text-3xl">Pan-Asian</h1>
-            <img
+            <Image
               className=" w-full h-full rounded object-fit hover:shadow-2xl"
               src="/images/cow-panasia.png"
+              width={1}
+              height={1}
+              alt=""
             />
           </div>
         </Link>
       </div>
       <div className="fixed bottom-4 right-4">
         <Link href="https://discord.gg/a2EHSsfP">
-          <img
+          <Image
             src="/images/discord.png"
             alt="Discord"
             className="w-12 h-12 cursor-pointer"
+            width={1}
+            height={1}
           />
         </Link>
       </div>

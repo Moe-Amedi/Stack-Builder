@@ -21,48 +21,50 @@ interface Level {
 
 interface Attack {
   id: number;
-  unarmored_atk: number;
-  l_armor_atk: number;
-  h_armor_atk: number;
-  airplane_atk: number;
+  infantry_atk: number;
+  armor_atk: number;
+  fixed_atk: number;
+  rotary_atk: number;
+  missile_atk: number;
   ship_atk: number;
   sub_atk: number;
   building_atk: number;
-  morale_atk: number;
+  pops_atk: number;
 }
 
 interface Defense {
   id: number;
-  unarmored_def: number;
-  l_armor_def: number;
-  h_armor_def: number;
-  airplane_def: number;
+  infantry_def: number;
+  armor_def: number;
+  fixed_def: number;
+  rotary_def: number;
+  missile_def: number;
   ship_def: number;
   sub_def: number;
   building_def: number;
-  morale_def: number;
+  pops_def: number;
 }
 
 interface Cost {
   id: number;
-  cash: number;
-  food: number;
-  goods: number;
-  manpower: number;
-  metal: number;
-  oil: number;
+  supplies: number;
+  components: number;
+  fuel: number;
+  electronics: number;
   rares: number;
+  manpower: number;
+  cash: number;
 }
 
 interface Upkeep {
   id: number;
-  cash: number;
-  food: number;
-  goods: number;
-  manpower: number;
-  metal: number;
-  oil: number;
+  supplies: number;
+  components: number;
+  fuel: number;
+  electronics: number;
   rares: number;
+  manpower: number;
+  cash: number;
 }
 
 export const useHandler = () => {
@@ -72,25 +74,25 @@ export const useHandler = () => {
   const [defense, setDefense] = useState<Defense>();
   const [cost, setCost] = useState<Cost>({
     id: 0,
-    cash: 0,
-    food: 0,
-    goods: 0,
-    manpower: 0,
-    metal: 0,
-    oil: 0,
+    supplies: 0,
+    components: 0,
+    fuel: 0,
+    electronics: 0,
     rares: 0,
+    manpower: 0,
+    cash: 0,
   });
   const [upkeep, setUpkeep] = useState<Upkeep>();
   const [hp, setHP] = useState<any>(0);
   const [prodTime, setProdTime] = useState<Cost>({
     id: 0,
-    cash: 0,
-    food: 0,
-    goods: 0,
-    manpower: 0,
-    metal: 0,
-    oil: 0,
+    supplies: 0,
+    components: 0,
+    fuel: 0,
+    electronics: 0,
     rares: 0,
+    manpower: 0,
+    cash: 0,
   });
   const dispatch = useDispatch();
   const Stack = useSelector((state: RootState) => state.stack.stack);
@@ -126,7 +128,7 @@ export const useHandler = () => {
       const amount: number = stack?.amount ?? 0;
       unit.attackData.forEach((atk: any) => {
         Object.keys(atk).forEach((attackType) => {
-          if (attackType !== "cow_level_id" && attackType !== "cow_attack_id") {
+          if (attackType !== "con_level_id" && attackType !== "con_attack_id") {
             attackSum[attackType] =
               (attackSum[attackType] || 0) + atk[attackType] * amount;
           }
@@ -146,8 +148,8 @@ export const useHandler = () => {
       unit.defenseData.forEach((def: any) => {
         Object.keys(def).forEach((defenseType) => {
           if (
-            defenseType !== "cow_level_id" &&
-            defenseType !== "cow_defense_id"
+            defenseType !== "con_level_id" &&
+            defenseType !== "con_defense_id"
           ) {
             defenseSum[defenseType] =
               (defenseSum[defenseType] || 0) + def[defenseType] * amount;
@@ -166,7 +168,7 @@ export const useHandler = () => {
       const amount: number = stack?.amount ?? 0;
       unit.costData.forEach((cst: any) => {
         Object.keys(cst).forEach((costType) => {
-          if (costType !== "cow_level_id" && costType !== "cow_cost_id") {
+          if (costType !== "con_level_id" && costType !== "con_cost_id") {
             costSum[costType] =
               (costSum[costType] || 0) + cst[costType] * amount;
           }
@@ -184,7 +186,7 @@ export const useHandler = () => {
       const amount: number = stack?.amount ?? 0;
       unit.upkeepData.forEach((keep: any) => {
         Object.keys(keep).forEach((upkeepType) => {
-          if (upkeepType !== "cow_level_id" && upkeepType !== "cow_upkeep_id") {
+          if (upkeepType !== "con_level_id" && upkeepType !== "con_upkeep_id") {
             upkeepSum[upkeepType] =
               (upkeepSum[upkeepType] || 0) + keep[upkeepType] * amount;
           }
@@ -216,7 +218,7 @@ export const useHandler = () => {
 
   const handleFetch = async () => {
     try {
-      const response = await fetch("/api/callofwar/axis", {
+      const response = await fetch("/api/conflict/western", {
         method: "GET",
       });
       if (!response.ok) {
@@ -240,6 +242,7 @@ export const useHandler = () => {
       },
       {}
     );
+    // console.log(unitsByCategory);
     return unitsByCategory;
   };
 
@@ -252,22 +255,12 @@ export const useHandler = () => {
         console.warn(`${unit.name} is already in the stack`);
         return;
       } else {
-        const basicUnit = {
-          id: unit.id,
-          name: unit.name,
-          category: unit.category,
-        };
         // console.log(unit);
         dispatch(addBasicToStack(unit));
         handleStackLength();
-
-        const fullUnit = {
-          id: unit.id,
-          level: unit.levels,
-        };
       }
     } else {
-      console.warn("the size of the stack exceedes 10");
+      console.log("the size of the stack exceedes 100");
     }
   };
 

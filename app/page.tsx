@@ -10,13 +10,8 @@ const Page = () => {
       <div className="px-10 pt-10 pb-2 text-center w-full ">
         <h1 className=" text-3xl">Choose Your Game</h1>
         <h3 className="my-4 text-red-600">
-          Please note that this is a beta version so there will be bugs and for
-          now only Call of War is available, Conflict of Nations will be
-          available soon plus more features in the future
-        </h3>
-        <h3 className="my-4 text-red-600">
           This site is not yet optimized for mobile and tablets so please only
-          use it on PC.
+          use it on PC, or rotate your mobile device.
         </h3>
       </div>
       <div className="flex h-screen mx-10">
@@ -29,13 +24,16 @@ const Page = () => {
             onMouseLeave={() => setHovered(0)}
           >
             <h1 className=" p-5 text-3xl">Call Of War</h1>
-            <img
+            <Image
               className=" w-11/12 h-full rounded object-fit hover:shadow-2xl"
               src="/images/ww2.png"
+              width={1}
+              height={1}
+              alt=""
             />
           </div>
         </Link>
-        <Link href="/">
+        <Link href="/ConflictOfNations">
           <div
             className={` mx-4 relative grid justify-items-center transition-transform hover:scale-105 transform-gpu ${
               hovered === 2 && "z-20"
@@ -44,9 +42,12 @@ const Page = () => {
             onMouseLeave={() => setHovered(0)}
           >
             <h1 className=" p-5 text-3xl">Conflict Of Nations</h1>
-            <img
+            <Image
               className=" w-11/12 h-full rounded object-fit hover:shadow-2xl"
               src="/images/ww3.png"
+              width={1}
+              height={1}
+              alt=""
             />
           </div>
         </Link>

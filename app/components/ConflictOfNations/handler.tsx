@@ -2,7 +2,7 @@ import { addFullToStack } from "@/app/redux/stack/stackSlice";
 import { RootState } from "@/app/redux/store";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addCurrentData } from "../redux/dataStack/dataSlice";
+import { addCurrentData } from "../../redux/dataStack/dataSlice";
 
 interface Unit {
   id: number;
@@ -24,48 +24,50 @@ interface Levels {
 
 interface Attack {
   id: number;
-  unarmored_atk: number;
-  l_armored_atk: number;
-  h_armored_atk: number;
-  air_atk: number;
+  infantry_atk: number;
+  armor_atk: number;
+  fixed_atk: number;
+  rotary_atk: number;
+  missile_atk: number;
   ship_atk: number;
   sub_atk: number;
   building_atk: number;
-  morale_atk: number;
+  pops_atk: number;
 }
 
 interface Defense {
   id: number;
-  unarmored_def: number;
-  l_armored_def: number;
-  h_armored_def: number;
-  air_def: number;
+  infantry_def: number;
+  armor_def: number;
+  fixed_def: number;
+  rotary_def: number;
+  missile_def: number;
   ship_def: number;
   sub_def: number;
   building_def: number;
-  morale_def: number;
+  pops_def: number;
 }
 
 interface Cost {
   id: number;
-  cash: number;
-  food: number;
-  goods: number;
-  manpower: number;
-  metal: number;
-  oil: number;
+  supplies: number;
+  components: number;
+  fuel: number;
+  electronics: number;
   rares: number;
+  manpower: number;
+  cash: number;
 }
 
 interface Upkeep {
   id: number;
-  cash: number;
-  food: number;
-  goods: number;
-  manpower: number;
-  metal: number;
-  oil: number;
+  supplies: number;
+  components: number;
+  fuel: number;
+  electronics: number;
   rares: number;
+  manpower: number;
+  cash: number;
 }
 
 export const useHandler = () => {
@@ -74,25 +76,25 @@ export const useHandler = () => {
   const dispatch = useDispatch();
   const Stack = useSelector((state: RootState) => state.stack.stack);
 
-  const handleFetchunit = async (id: number) => {
-    try {
-      const response = await fetch(`/api/callofwar/addUnit?id=${id}`, {
-        method: "GET",
-      });
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
+  // const handleFetchunit = async (id: number) => {
+  //   try {
+  //     const response = await fetch(`/api/callofwar/addUnit?id=${id}`, {
+  //       method: "GET",
+  //     });
+  //     if (!response.ok) {
+  //       throw new Error(`HTTP error! Status: ${response.status}`);
+  //     }
 
-      const unitData = await response.json();
-      // console.log("stack", Stack);
-      // console.log("unit", unitData);
-      handleAddToStack(id, unitData);
-      setUnit(unitData);
-      return unitData;
-    } catch (error) {
-      console.log("Error", error);
-    }
-  };
+  //     const unitData = await response.json();
+  //     // console.log("stack", Stack);
+  //     // console.log("unit", unitData);
+  //     handleAddToStack(id, unitData);
+  //     setUnit(unitData);
+  //     return unitData;
+  //   } catch (error) {
+  //     console.log("Error", error);
+  //   }
+  // };
 
   const handleAddToStack = async (id: number, unitData: any) => {
     // console.log("id: ", id);
@@ -108,7 +110,7 @@ export const useHandler = () => {
   };
 
   return {
-    handleFetchunit,
+    // handleFetchunit,
     handleAddToStack,
     handleAddToData,
   };

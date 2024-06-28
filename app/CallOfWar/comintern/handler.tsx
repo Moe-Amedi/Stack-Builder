@@ -70,9 +70,28 @@ export const useHandler = () => {
   const [length, setLength] = useState<number>(0);
   const [attack, setAttack] = useState<Attack>();
   const [defense, setDefense] = useState<Defense>();
-  const [cost, setCost] = useState<Cost>();
+  const [cost, setCost] = useState<Cost>({
+    id: 0,
+    cash: 0,
+    food: 0,
+    goods: 0,
+    manpower: 0,
+    metal: 0,
+    oil: 0,
+    rares: 0,
+  });
   const [upkeep, setUpkeep] = useState<Upkeep>();
   const [hp, setHP] = useState<any>(0);
+  const [prodTime, setProdTime] = useState<Cost>({
+    id: 0,
+    cash: 0,
+    food: 0,
+    goods: 0,
+    manpower: 0,
+    metal: 0,
+    oil: 0,
+    rares: 0,
+  });
   const dispatch = useDispatch();
   const Stack = useSelector((state: RootState) => state.stack.stack);
   const dataStack = useSelector((state: RootState) => state.data.data);
@@ -175,6 +194,26 @@ export const useHandler = () => {
     setUpkeep(upkeepSum);
   };
 
+  const handleProdTime = (productionPerHour: any, resource: keyof Cost) => {
+    if (productionPerHour === 0) {
+      return null;
+    }
+
+    const totalCost = cost[resource];
+    const timeInHours = totalCost / productionPerHour;
+    setProdTime((prevState) => ({ ...prevState, [resource]: timeInHours }));
+  };
+
+  const formatTime = (timeInHours: number | null) => {
+    if (timeInHours === null || isNaN(timeInHours) || !isFinite(timeInHours)) {
+      return "0d 0h 0m";
+    }
+    const days = Math.floor(timeInHours / 24);
+    const hours = Math.floor(timeInHours % 24);
+    const minutes = Math.floor((timeInHours % 1) * 60);
+    return `${days}d ${hours}h ${minutes}m`;
+  };
+
   const handleFetch = async () => {
     try {
       const response = await fetch("/api/callofwar/soviet", {
@@ -208,7 +247,7 @@ export const useHandler = () => {
     const unitInStack = Stack.some((stackItem) => stackItem.id === unit.id);
     // console.log(unit);
 
-    if (length < 10) {
+    if (length < 100) {
       if (unitInStack) {
         console.warn(`${unit.name} is already in the stack`);
         return;
@@ -248,10 +287,13 @@ export const useHandler = () => {
     cost,
     upkeep,
     hp,
+    prodTime,
     handleFetch,
     handleUnitMenu,
     handleAddUnit,
     handleStackLength,
     handleData,
+    handleProdTime,
+    formatTime,
   };
 };
