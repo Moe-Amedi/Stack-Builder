@@ -14,7 +14,7 @@ const Page = () => {
     >
       <div className="navbar bg-slate-700 fixed top-0 z-30 shadow-xl">
         <div className="flex-1">
-          <a className="btn btn-ghost bg-slate-800" href="/">
+          <Link className="btn btn-ghost bg-slate-800" href="/">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -29,7 +29,7 @@ const Page = () => {
                 d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
               />
             </svg>
-          </a>
+          </Link>
         </div>
       </div>
       <div className="px-10 pt-10 pb-2 text-center w-full mt-12  ">
@@ -49,8 +49,8 @@ const Page = () => {
               className=" w-full h-full rounded object-fit hover:shadow-2xl"
               src="/images/con-west.png"
               alt=""
-              width={1}
-              height={1}
+              width={1000}
+              height={1000}
             />
           </div>
         </Link>
@@ -67,8 +67,8 @@ const Page = () => {
               className=" w-full h-full rounded object-fit hover:shadow-2xl"
               src="/images/con-eu.png"
               alt=""
-              width={1}
-              height={1}
+              width={1000}
+              height={1000}
             />
           </div>
         </Link>
@@ -85,8 +85,8 @@ const Page = () => {
               className=" w-full h-full rounded object-fit hover:shadow-2xl"
               src="/images/con-east.png"
               alt=""
-              width={1}
-              height={1}
+              width={1000}
+              height={1000}
             />
           </div>
         </Link>
@@ -97,8 +97,8 @@ const Page = () => {
             src="/images/discord.png"
             alt="Discord"
             className="w-12 h-12 cursor-pointer"
-            width={1}
-            height={1}
+            width={100}
+            height={100}
           />
         </Link>
       </div>

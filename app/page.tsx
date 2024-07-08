@@ -27,8 +27,8 @@ const Page = () => {
             <Image
               className=" w-11/12 h-full rounded object-fit hover:shadow-2xl"
               src="/images/ww2.png"
-              width={1}
-              height={1}
+              width={1000}
+              height={1000}
               alt=""
             />
           </div>
@@ -45,8 +45,8 @@ const Page = () => {
             <Image
               className=" w-11/12 h-full rounded object-fit hover:shadow-2xl"
               src="/images/ww3.png"
-              width={1}
-              height={1}
+              width={1000}
+              height={1000}
               alt=""
             />
           </div>
@@ -54,8 +54,10 @@ const Page = () => {
       </div>
       <div className="fixed bottom-4 right-4">
         <Link href="https://discord.gg/a2EHSsfP">
-          <img
+          <Image
             src="/images/discord.png"
+            width={100}
+            height={100}
             alt="Discord"
             className="w-12 h-12 cursor-pointer"
           />

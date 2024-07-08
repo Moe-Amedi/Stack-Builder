@@ -7,6 +7,7 @@ import { RootState } from "@/app/redux/store";
 import { resetStack } from "@/app/redux/stack/stackSlice";
 import { resetData } from "@/app/redux/dataStack/dataSlice";
 import Link from "next/link";
+import Image from "next/image";
 
 interface Unit {
   id: number;
@@ -97,7 +98,10 @@ const Page = () => {
     >
       <div className="navbar bg-slate-700 fixed top-0 z-10 shadow-xl">
         <div className="flex-1">
-          <a className="btn btn-ghost bg-slate-800" href="/ConflictOfNations">
+          <Link
+            className="btn btn-ghost bg-slate-800"
+            href="/ConflictOfNations"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -112,7 +116,7 @@ const Page = () => {
                 d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
               />
             </svg>
-          </a>
+          </Link>
         </div>
       </div>
       <div className="grid w-full h-full justify-items-center">
@@ -515,8 +519,10 @@ const Page = () => {
       </div>
       <div className="fixed bottom-4 right-4">
         <Link href="https://discord.gg/a2EHSsfP">
-          <img
+          <Image
             src="/images/discord.png"
+            width={100}
+            height={100}
             alt="Discord"
             className="w-12 h-12 cursor-pointer"
           />
