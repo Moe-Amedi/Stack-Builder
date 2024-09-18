@@ -1,6 +1,5 @@
 "use client";
-import UnitCard from "@/app/components/CallOfWar/UnitCard";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useHandler } from "./handler";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/app/redux/store";
@@ -8,39 +7,23 @@ import { resetStack } from "@/app/redux/stack/stackSlice";
 import { resetData } from "@/app/redux/dataStack/dataSlice";
 import Link from "next/link";
 import Image from "next/image";
-
-interface Unit {
-  id: number;
-  name: string;
-  category: string;
-}
-
-interface Stack {
-  id: number;
-  name: string;
-}
+import StackComponent from "@/app/components/COWStack/StackComponent";
 
 const Page = () => {
   const {
     handleFetch,
-    handleUnitMenu,
-    handleAddUnit,
-    handleStackLength,
     handleData,
     handleProdTime,
     formatTime,
     units,
-    length,
     attack,
     defense,
     cost,
     upkeep,
-    hp,
     prodTime,
   } = useHandler();
-  const menuUnits = handleUnitMenu(units);
-  const Stack = useSelector((state: RootState) => state.stack.stack);
-  const dataStack = useSelector((state: RootState) => state.data.data);
+  const Stacks = useSelector((state: RootState) => state.stack.stacks);
+  const dataStacks = useSelector((state: RootState) => state.data.data);
   const dispatch = useDispatch();
   const [ProductionPerHour, setProductionPerHour] = useState({
     id: 0,
@@ -74,12 +57,10 @@ const Page = () => {
   }, []);
 
   useEffect(() => {
-    handleStackLength();
-  }, [Stack]);
-
-  useEffect(() => {
     handleData();
-  }, [dataStack]);
+    console.log("Stacks: ", Stacks);
+    console.log("DataStacks: ", dataStacks);
+  }, [dataStacks]);
 
   useEffect(() => {
     handleProdTime(ProductionPerHour.cash, "cash");
@@ -90,6 +71,7 @@ const Page = () => {
     handleProdTime(ProductionPerHour.oil, "oil");
     handleProdTime(ProductionPerHour.rares, "rares");
   }, [cost, ProductionPerHour]);
+
   return (
     <div
       className="flex flex-col h-full bg-fixed bg-origin-border bg-bottom bg-no-repeat bg-cover"
@@ -447,62 +429,11 @@ const Page = () => {
             </tbody>
           </table>
         </div>
-        <div className="w-3/5 min-h-screen bg-slate-700 rounded-lg p-2 m-2 mt-4 shadow-2xl shadow-gray-900 ">
-          <div className="flex justify-between">
-            <div className="dropdown justify-start p-2 mb-2">
-              <div
-                tabIndex={0}
-                role="button"
-                className="btn m-1 text-white bg-slate-800 border-slate-800 hover:bg-slate-900 hover:border-slate-950"
-              >
-                Add a Unit
-              </div>
-              <div className="p-2 shadow menu dropdown-content z-[1] bg-slate-800 rounded-box">
-                <div className="flex">
-                  {Object.keys(menuUnits).map((category) => (
-                    <ul key={category} className="w-32 px-2">
-                      <li className="w-full text-center text-gray-300 p-2">
-                        {category}
-                      </li>
-                      {menuUnits[category].map((unit: Unit) => (
-                        <li
-                          key={unit.id}
-                          className=" rounded-lg hover:bg-slate-900"
-                        >
-                          <button onClick={() => handleAddUnit(unit)}>
-                            {unit.name}
-                          </button>
-                        </li>
-                      ))}
-                    </ul>
-                  ))}
-                </div>
-              </div>
-            </div>
-            <div className="flex justify-center items-center">
-              <div className="flex bg-slate-800 rounded-lg p-4">
-                <h2 className="px-1">HP:</h2>
-                <h2>{hp ? hp.toFixed(0) : 0}</h2>
-              </div>
-            </div>
-            <div className="flex justify-end items-center">
-              <div className="flex p-4">
-                <h2 className="px-1">Stack:</h2>
-                <h2>{length.toString()}/100</h2>
-              </div>
-            </div>
-          </div>
-
-          <div className="justify-between mx-2 px-2 py-1 bg-slate-600 rounded-lg">
-            {Stack.length > 0 ? (
-              Stack.map((unit: any) => <UnitCard key={unit.id} unit={unit} />)
-            ) : (
-              <p className="h-screen text-center content-center text-2xl">
-                No Units In the Stack
-              </p>
-            )}
-          </div>
-        </div>
+        <>
+          {Object.keys(Stacks).map((stackId) => (
+            <StackComponent key={stackId} units={units} stackId={stackId} />
+          ))}
+        </>
       </div>
       <div className="fixed bottom-4 right-4">
         <Link href="https://discord.gg/a2EHSsfP">

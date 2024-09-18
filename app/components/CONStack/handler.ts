@@ -7,6 +7,7 @@ interface Unit {
   id: number;
   name: string;
   category: string;
+  level: Level[];
 }
 
 interface Level {
@@ -21,48 +22,50 @@ interface Level {
 
 interface Attack {
   id: number;
-  unarmored_atk: number;
-  l_armor_atk: number;
-  h_armor_atk: number;
-  airplane_atk: number;
+  infantry_atk: number;
+  armor_atk: number;
+  fixed_atk: number;
+  rotary_atk: number;
+  missile_atk: number;
   ship_atk: number;
   sub_atk: number;
   building_atk: number;
-  morale_atk: number;
+  pops_atk: number;
 }
 
 interface Defense {
   id: number;
-  unarmored_def: number;
-  l_armor_def: number;
-  h_armor_def: number;
-  airplane_def: number;
+  infantry_def: number;
+  armor_def: number;
+  fixed_def: number;
+  rotary_def: number;
+  missile_def: number;
   ship_def: number;
   sub_def: number;
   building_def: number;
-  morale_def: number;
+  pops_def: number;
 }
 
 interface Cost {
   id: number;
-  cash: number;
-  food: number;
-  goods: number;
-  manpower: number;
-  metal: number;
-  oil: number;
+  supplies: number;
+  components: number;
+  fuel: number;
+  electronics: number;
   rares: number;
+  manpower: number;
+  cash: number;
 }
 
 interface Upkeep {
   id: number;
-  cash: number;
-  food: number;
-  goods: number;
-  manpower: number;
-  metal: number;
-  oil: number;
+  supplies: number;
+  components: number;
+  fuel: number;
+  electronics: number;
   rares: number;
+  manpower: number;
+  cash: number;
 }
 
 export const useHandler = () => {
@@ -72,40 +75,98 @@ export const useHandler = () => {
   const [defense, setDefense] = useState<Defense>();
   const [cost, setCost] = useState<Cost>({
     id: 0,
-    cash: 0,
-    food: 0,
-    goods: 0,
-    manpower: 0,
-    metal: 0,
-    oil: 0,
+    supplies: 0,
+    components: 0,
+    fuel: 0,
+    electronics: 0,
     rares: 0,
+    manpower: 0,
+    cash: 0,
   });
   const [upkeep, setUpkeep] = useState<Upkeep>();
   const [hp, setHP] = useState<any>(0);
   const [prodTime, setProdTime] = useState<Cost>({
     id: 0,
-    cash: 0,
-    food: 0,
-    goods: 0,
-    manpower: 0,
-    metal: 0,
-    oil: 0,
+    supplies: 0,
+    components: 0,
+    fuel: 0,
+    electronics: 0,
     rares: 0,
+    manpower: 0,
+    cash: 0,
   });
   const dispatch = useDispatch();
-  const Stack = useSelector((state: RootState) => state.stack.stack);
-  const dataStack = useSelector((state: RootState) => state.data.data);
+  const Stacks = useSelector((state: RootState) => state.stack.stacks);
+  const dataStacks = useSelector((state: RootState) => state.data.data);
 
-  const handleData = () => {
-    handleAttack();
-    handleDefense();
-    handleCost();
-    handleUpkeep();
-    handleHP();
+  const handleUnitMenu = (units: Unit[]) => {
+    const unitsByCategory: { [key: string]: Unit[] } = units.reduce(
+      (acc: { [key: string]: Unit[] }, unit) => {
+        acc[unit.category] = [...(acc[unit.category] || []), unit];
+        return acc;
+      },
+      {}
+    );
+    return unitsByCategory;
   };
 
-  const handleHP = () => {
+  const handleAddUnit = (stackId: string, unit: any) => {
+    const unitInStack = Stacks[stackId].some(
+      (stackItem) => stackItem.id === unit.id
+    );
+    // console.log(unit);
+
+    if (length < 9) {
+      if (unitInStack) {
+        console.warn(`${unit.name} is already in the stack`);
+        return;
+      } else {
+        const basicUnit = {
+          id: unit.id,
+          name: unit.name,
+          category: unit.category,
+        };
+        // console.log(stackId);
+        dispatch(addBasicToStack({ stackId, unit }));
+        handleStackLength(stackId);
+        console.log("Stack: ", Stacks);
+        console.log("dataStack: ", dataStacks);
+
+        const fullUnit = {
+          id: unit.id,
+          level: unit.levels,
+        };
+      }
+    } else {
+      console.warn("the size of the stack exceedes 10");
+    }
+  };
+
+  const handleStackLength = (stackId: string) => {
+    let counter = 0;
+    Stacks[stackId].forEach((s) => {
+      counter += s.amount;
+    });
+    setLength(counter);
+  };
+
+  const handleData = (stackId: string) => {
+    handleAttack(stackId);
+    handleDefense(stackId);
+    handleCost(stackId);
+    handleUpkeep(stackId);
+    handleHP(stackId);
+    // console.log("hp", hp);
+    // console.log("attack", attack);
+    // console.log("defense", defense);
+    // console.log("cost", cost);
+    // console.log("upkeep", upkeep);
+  };
+
+  const handleHP = (stackId: string) => {
     let hpSum: any;
+    const dataStack = dataStacks[stackId];
+    const Stack = Stacks[stackId];
 
     dataStack.forEach((unit: any) => {
       const stack = Stack.find((amount) => amount.id === unit.id);
@@ -117,9 +178,11 @@ export const useHandler = () => {
     // console.log(hpSum);
   };
 
-  const handleAttack = () => {
+  const handleAttack = (stackId: string) => {
     const attackSum: any = {};
     // console.log(dataStack);
+    const dataStack = dataStacks[stackId];
+    const Stack = Stacks[stackId];
 
     dataStack.forEach((unit: any) => {
       const stack = Stack.find((amount) => amount.id === unit.id);
@@ -137,8 +200,10 @@ export const useHandler = () => {
     setAttack(attackSum);
   };
 
-  const handleDefense = () => {
+  const handleDefense = (stackId: string) => {
     const defenseSum: any = {};
+    const dataStack = dataStacks[stackId];
+    const Stack = Stacks[stackId];
 
     dataStack.forEach((unit: any) => {
       const stack = Stack.find((amount) => amount.id === unit.id);
@@ -158,8 +223,10 @@ export const useHandler = () => {
     setDefense(defenseSum);
   };
 
-  const handleCost = () => {
+  const handleCost = (stackId: string) => {
     const costSum: any = {};
+    const dataStack = dataStacks[stackId];
+    const Stack = Stacks[stackId];
 
     dataStack.forEach((unit: any) => {
       const stack = Stack.find((amount) => amount.id === unit.id);
@@ -176,8 +243,10 @@ export const useHandler = () => {
     setCost(costSum);
   };
 
-  const handleUpkeep = () => {
+  const handleUpkeep = (stackId: string) => {
     const upkeepSum: any = {};
+    const dataStack = dataStacks[stackId];
+    const Stack = Stacks[stackId];
 
     dataStack.forEach((unit: any) => {
       const stack = Stack.find((amount) => amount.id === unit.id);
@@ -214,72 +283,13 @@ export const useHandler = () => {
     return `${days}d ${hours}h ${minutes}m`;
   };
 
-  const handleFetch = async () => {
-    try {
-      const response = await fetch("/api/callofwar/allies", {
-        method: "GET",
-      });
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      const unitData = await response.json();
-      setUnits(unitData);
-      // console.log(unitData);
-      return unitData;
-    } catch (error) {
-      console.log("Error", error);
-    }
-  };
-
-  const handleUnitMenu = (units: Unit[]) => {
-    const unitsByCategory: { [key: string]: Unit[] } = units.reduce(
-      (acc: { [key: string]: Unit[] }, unit) => {
-        acc[unit.category] = [...(acc[unit.category] || []), unit];
-        return acc;
-      },
-      {}
-    );
-    return unitsByCategory;
-  };
-
-  const handleAddUnit = (unit: any) => {
-    const unitInStack = Stack.some((stackItem) => stackItem.id === unit.id);
-    // console.log(unit);
-
-    if (length < 100) {
-      if (unitInStack) {
-        console.warn(`${unit.name} is already in the stack`);
-        return;
-      } else {
-        const basicUnit = {
-          id: unit.id,
-          name: unit.name,
-          category: unit.category,
-        };
-        // console.log(unit);
-        dispatch(addBasicToStack(unit));
-        handleStackLength();
-
-        const fullUnit = {
-          id: unit.id,
-          level: unit.levels,
-        };
-      }
-    } else {
-      console.warn("the size of the stack exceedes 10");
-    }
-  };
-
-  const handleStackLength = () => {
-    let counter = 0;
-    Stack.forEach((s) => {
-      counter += s.amount;
-    });
-    setLength(counter);
-  };
-
   return {
+    handleUnitMenu,
+    handleAddUnit,
+    formatTime,
+    handleProdTime,
+    handleData,
+    handleStackLength,
     units,
     length,
     attack,
@@ -288,12 +298,5 @@ export const useHandler = () => {
     upkeep,
     hp,
     prodTime,
-    handleFetch,
-    handleUnitMenu,
-    handleAddUnit,
-    handleStackLength,
-    handleData,
-    handleProdTime,
-    formatTime,
   };
 };

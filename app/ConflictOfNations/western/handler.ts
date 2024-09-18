@@ -7,6 +7,7 @@ interface Unit {
   id: number;
   name: string;
   category: string;
+  level: Level[];
 }
 
 interface Level {
@@ -95,43 +96,36 @@ export const useHandler = () => {
     cash: 0,
   });
   const dispatch = useDispatch();
-  const Stack = useSelector((state: RootState) => state.stack.stack);
-  const dataStack = useSelector((state: RootState) => state.data.data);
+  const Stacks = useSelector((state: RootState) => state.stack.stacks);
+  const dataStacks = useSelector((state: RootState) => state.data.data);
 
   const handleData = () => {
     handleAttack();
     handleDefense();
     handleCost();
     handleUpkeep();
-    handleHP();
-  };
-
-  const handleHP = () => {
-    let hpSum: any;
-
-    dataStack.forEach((unit: any) => {
-      const stack = Stack.find((amount) => amount.id === unit.id);
-      const amount: number = stack?.amount ?? 0;
-
-      hpSum = (hpSum || 0) + unit.level.hp * amount;
-    });
-    setHP(hpSum);
-    // console.log(hpSum);
   };
 
   const handleAttack = () => {
     const attackSum: any = {};
     // console.log(dataStack);
+    Object.keys(Stacks).forEach((stackId) => {
+      const dataStack = dataStacks[stackId];
+      const Stack = Stacks[stackId];
 
-    dataStack.forEach((unit: any) => {
-      const stack = Stack.find((amount) => amount.id === unit.id);
-      const amount: number = stack?.amount ?? 0;
-      unit.attackData.forEach((atk: any) => {
-        Object.keys(atk).forEach((attackType) => {
-          if (attackType !== "con_level_id" && attackType !== "con_attack_id") {
-            attackSum[attackType] =
-              (attackSum[attackType] || 0) + atk[attackType] * amount;
-          }
+      dataStack.forEach((unit: any) => {
+        const stack = Stack.find((amount) => amount.id === unit.id);
+        const amount: number = stack?.amount ?? 0;
+        unit.attackData.forEach((atk: any) => {
+          Object.keys(atk).forEach((attackType) => {
+            if (
+              attackType !== "con_level_id" &&
+              attackType !== "con_attack_id"
+            ) {
+              attackSum[attackType] =
+                (attackSum[attackType] || 0) + atk[attackType] * amount;
+            }
+          });
         });
       });
     });
@@ -142,18 +136,22 @@ export const useHandler = () => {
   const handleDefense = () => {
     const defenseSum: any = {};
 
-    dataStack.forEach((unit: any) => {
-      const stack = Stack.find((amount) => amount.id === unit.id);
-      const amount: number = stack?.amount ?? 0;
-      unit.defenseData.forEach((def: any) => {
-        Object.keys(def).forEach((defenseType) => {
-          if (
-            defenseType !== "con_level_id" &&
-            defenseType !== "con_defense_id"
-          ) {
-            defenseSum[defenseType] =
-              (defenseSum[defenseType] || 0) + def[defenseType] * amount;
-          }
+    Object.keys(Stacks).forEach((stackId) => {
+      const dataStack = dataStacks[stackId];
+      const Stack = Stacks[stackId];
+      dataStack.forEach((unit: any) => {
+        const stack = Stack.find((amount) => amount.id === unit.id);
+        const amount: number = stack?.amount ?? 0;
+        unit.defenseData.forEach((def: any) => {
+          Object.keys(def).forEach((defenseType) => {
+            if (
+              defenseType !== "con_level_id" &&
+              defenseType !== "con_defense_id"
+            ) {
+              defenseSum[defenseType] =
+                (defenseSum[defenseType] || 0) + def[defenseType] * amount;
+            }
+          });
         });
       });
     });
@@ -163,15 +161,20 @@ export const useHandler = () => {
   const handleCost = () => {
     const costSum: any = {};
 
-    dataStack.forEach((unit: any) => {
-      const stack = Stack.find((amount) => amount.id === unit.id);
-      const amount: number = stack?.amount ?? 0;
-      unit.costData.forEach((cst: any) => {
-        Object.keys(cst).forEach((costType) => {
-          if (costType !== "con_level_id" && costType !== "con_cost_id") {
-            costSum[costType] =
-              (costSum[costType] || 0) + cst[costType] * amount;
-          }
+    Object.keys(Stacks).forEach((stackId) => {
+      const dataStack = dataStacks[stackId];
+      const Stack = Stacks[stackId];
+
+      dataStack.forEach((unit: any) => {
+        const stack = Stack.find((amount) => amount.id === unit.id);
+        const amount: number = stack?.amount ?? 0;
+        unit.costData.forEach((cst: any) => {
+          Object.keys(cst).forEach((costType) => {
+            if (costType !== "con_level_id" && costType !== "con_cost_id") {
+              costSum[costType] =
+                (costSum[costType] || 0) + cst[costType] * amount;
+            }
+          });
         });
       });
     });
@@ -181,15 +184,23 @@ export const useHandler = () => {
   const handleUpkeep = () => {
     const upkeepSum: any = {};
 
-    dataStack.forEach((unit: any) => {
-      const stack = Stack.find((amount) => amount.id === unit.id);
-      const amount: number = stack?.amount ?? 0;
-      unit.upkeepData.forEach((keep: any) => {
-        Object.keys(keep).forEach((upkeepType) => {
-          if (upkeepType !== "con_level_id" && upkeepType !== "con_upkeep_id") {
-            upkeepSum[upkeepType] =
-              (upkeepSum[upkeepType] || 0) + keep[upkeepType] * amount;
-          }
+    Object.keys(Stacks).forEach((stackId) => {
+      const dataStack = dataStacks[stackId];
+      const Stack = Stacks[stackId];
+
+      dataStack.forEach((unit: any) => {
+        const stack = Stack.find((amount) => amount.id === unit.id);
+        const amount: number = stack?.amount ?? 0;
+        unit.upkeepData.forEach((keep: any) => {
+          Object.keys(keep).forEach((upkeepType) => {
+            if (
+              upkeepType !== "con_level_id" &&
+              upkeepType !== "con_upkeep_id"
+            ) {
+              upkeepSum[upkeepType] =
+                (upkeepSum[upkeepType] || 0) + keep[upkeepType] * amount;
+            }
+          });
         });
       });
     });
@@ -218,7 +229,7 @@ export const useHandler = () => {
 
   const handleFetch = async () => {
     try {
-      const response = await fetch("/api/conflict/eastern", {
+      const response = await fetch("/api/conflict/western", {
         method: "GET",
       });
       if (!response.ok) {
@@ -234,54 +245,6 @@ export const useHandler = () => {
     }
   };
 
-  const handleUnitMenu = (units: Unit[]) => {
-    const unitsByCategory: { [key: string]: Unit[] } = units.reduce(
-      (acc: { [key: string]: Unit[] }, unit) => {
-        acc[unit.category] = [...(acc[unit.category] || []), unit];
-        return acc;
-      },
-      {}
-    );
-    // console.log(unitsByCategory);
-    return unitsByCategory;
-  };
-
-  const handleAddUnit = (unit: any) => {
-    const unitInStack = Stack.some((stackItem) => stackItem.id === unit.id);
-    // console.log(unit);
-
-    if (length < 100) {
-      if (unitInStack) {
-        console.warn(`${unit.name} is already in the stack`);
-        return;
-      } else {
-        const basicUnit = {
-          id: unit.id,
-          name: unit.name,
-          category: unit.category,
-        };
-        // console.log(unit);
-        dispatch(addBasicToStack(unit));
-        handleStackLength();
-
-        const fullUnit = {
-          id: unit.id,
-          level: unit.levels,
-        };
-      }
-    } else {
-      console.warn("the size of the stack exceedes 10");
-    }
-  };
-
-  const handleStackLength = () => {
-    let counter = 0;
-    Stack.forEach((s) => {
-      counter += s.amount;
-    });
-    setLength(counter);
-  };
-
   return {
     units,
     length,
@@ -292,9 +255,6 @@ export const useHandler = () => {
     hp,
     prodTime,
     handleFetch,
-    handleUnitMenu,
-    handleAddUnit,
-    handleStackLength,
     handleData,
     handleProdTime,
     formatTime,

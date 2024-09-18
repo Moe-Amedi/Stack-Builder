@@ -12,14 +12,16 @@ import { RootState } from "../../redux/store";
 const UnitCard = (props: any) => {
   const { handleFetchunit, handleAddToStack, handleAddToData } = useHandler();
   const unit = props.unit;
-  const id = unit.id;
+  const unitId = unit.id;
   const name = unit.name;
   const category = unit.category;
+  const stackId = props.stackId;
   const dispatch = useDispatch();
   // const [unit, setUnit] = useState({});
   const [levelNum, setlevelNum] = useState(1);
-  const Stack = useSelector((state: RootState) => state.stack.stack);
-  const Unit: any = Stack.find((stack) => stack.id === id);
+  const Stacks = useSelector((state: RootState) => state.stack.stacks);
+  const Stack = Stacks[stackId];
+  const Unit: any = Stack.find((stack) => stack.id === unitId);
   const level = Unit.levels.find((lvl: any) => lvl.level.level === levelNum);
   const attack: any = level?.attackData;
   const defense: any = level?.defenseData;
@@ -29,8 +31,8 @@ const UnitCard = (props: any) => {
   );
 
   const removeUnit = (id: number) => {
-    dispatch(removeFromStack(id));
-    dispatch(removeData(id));
+    dispatch(removeFromStack({ stackId, unitId }));
+    dispatch(removeData({ stackId, unitId }));
   };
 
   const handleLevelChange = (direction: any) => {
@@ -61,14 +63,14 @@ const UnitCard = (props: any) => {
     });
     switch (direction) {
       case "increase":
-        if (counter < 100) {
-          dispatch(increaseAmount(id));
+        if (counter < 10) {
+          dispatch(increaseAmount({ stackId, unitId }));
         }
         break;
 
       case "decrease":
         if (counter > 1) {
-          dispatch(decreaseAmount(id));
+          dispatch(decreaseAmount({ stackId, unitId }));
         }
         break;
 
@@ -85,7 +87,7 @@ const UnitCard = (props: any) => {
     // setUnit(Unit);
     // console.log(Stack);
     if (level) {
-      handleAddToData(level, id);
+      handleAddToData(stackId, level, unitId);
     }
   }, [Stack, levelNum]);
   return (
@@ -200,7 +202,7 @@ const UnitCard = (props: any) => {
       <div className=" h-16">
         <button
           className="btn btn-neutral bg-slate-700 btn-xs mx-2 w-6 mt-1 h-6"
-          onClick={() => removeUnit(id)}
+          onClick={() => removeUnit(unitId)}
         >
           -
         </button>

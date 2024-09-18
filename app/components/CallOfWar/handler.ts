@@ -1,4 +1,4 @@
-import { addFullToStack } from "@/app/redux/stack/stackSlice";
+// import { addFullToStack } from "@/app/redux/stack/stackSlice";
 import { RootState } from "@/app/redux/store";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -69,42 +69,42 @@ interface Upkeep {
 }
 
 export const useHandler = () => {
-  const [unit, setUnit] = useState<Unit[]>([]);
-  const [FullUnit, setFullUnit] = useState();
+  // const [unit, setUnit] = useState<Unit[]>([]);
+  // const [FullUnit, setFullUnit] = useState();
   const dispatch = useDispatch();
-  const Stack = useSelector((state: RootState) => state.stack.stack);
+  const Stacks = useSelector((state: RootState) => state.stack.stacks);
+  const dataStacks = useSelector((state: RootState) => state.data.data);
 
   const handleFetchunit = async (id: number) => {
-    try {
-      const response = await fetch(`/api/callofwar/addUnit?id=${id}`, {
-        method: "GET",
-      });
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      const unitData = await response.json();
-      // console.log("stack", Stack);
-      // console.log("unit", unitData);
-      handleAddToStack(id, unitData);
-      setUnit(unitData);
-      return unitData;
-    } catch (error) {
-      console.log("Error", error);
-    }
+    // try {
+    //   const response = await fetch(`/api/callofwar/addUnit?id=${id}`, {
+    //     method: "GET",
+    //   });
+    //   if (!response.ok) {
+    //     throw new Error(`HTTP error! Status: ${response.status}`);
+    //   }
+    //   const unitData = await response.json();
+    //   // console.log("stack", Stack);
+    //   // console.log("unit", unitData);
+    //   handleAddToStack(id, unitData);
+    //   setUnit(unitData);
+    //   return unitData;
+    // } catch (error) {
+    //   console.log("Error", error);
+    // }
   };
 
   const handleAddToStack = async (id: number, unitData: any) => {
     // console.log("id: ", id);
     // console.log("unitData: ", unitData);
-    await dispatch(addFullToStack(unitData));
+    // await dispatch(addFullToStack(unitData));
     // console.log("stack", Stack);
   };
 
-  const handleAddToData = (level: Levels, id: number) => {
-    const updatedLevel: Levels = { ...level, id: id };
+  const handleAddToData = (stackId: string, level: Levels, id: number) => {
+    const unit: Levels = { ...level, id: id };
     // console.log(level);
-    dispatch(addCurrentData(updatedLevel));
+    dispatch(addCurrentData({ stackId, unit }));
   };
 
   return {

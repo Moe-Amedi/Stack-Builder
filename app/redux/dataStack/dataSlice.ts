@@ -1,6 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface DataState {
+  data: { [key: string]: Unit[] };
+}
+
+interface Unit {
   id: number;
   level: number;
   hp: number;
@@ -56,36 +60,71 @@ interface Upkeep {
   rares: number;
 }
 
-const initialState = { data: [] as DataState[] };
+const initialState: DataState = {
+  data: {
+    stack1: [],
+    stack2: [],
+    stack3: [],
+    stack4: [],
+    stack5: [],
+  },
+};
 
 const dataSlice = createSlice({
   name: "data",
   initialState,
   reducers: {
-    addCurrentData: (state, action: PayloadAction<any>) => {
-      const unit = action.payload;
+    addDataStack: (state, action: PayloadAction<string>) => {
+      const stackId = action.payload;
+      state.data[stackId] = [];
+    },
+
+    removeDataStack: (state, action: PayloadAction<string>) => {
+      const stackId = action.payload;
+      if (Object.keys(state.data).length > 1) {
+        delete state.data[stackId];
+      }
+    },
+
+    addCurrentData: (
+      state,
+      action: PayloadAction<{ stackId: string; unit: Unit }>
+    ) => {
+      const { stackId, unit } = action.payload;
+      const stack = state.data[stackId];
       // console.log("unit: ", unit);
 
-      const index = state.data.findIndex((dataItem) => dataItem.id === unit.id);
+      if (stack) {
+        const index = stack.findIndex((dataItem) => dataItem.id === unit.id);
 
-      if (index >= 0) {
-        state.data[index] = unit;
-      } else {
-        state.data.push(unit);
+        if (index >= 0) {
+          stack[index] = unit;
+        } else {
+          stack.push(unit);
+        }
       }
     },
-    removeData: (state, action: PayloadAction<any>) => {
-      const index = state.data.findIndex(
-        (dataItem) => dataItem.id === action.payload
-      );
-      if (index >= 0) {
-        state.data.splice(index, 1);
-      } else {
-        console.warn(
-          `can't Remove Unit (id: ${action.payload} as it is not in the Stack)`
-        );
+
+    removeData: (
+      state,
+      action: PayloadAction<{ stackId: string; unitId: number }>
+    ) => {
+      const { stackId, unitId } = action.payload;
+      const stack = state.data[stackId];
+
+      if (stack) {
+        const index = stack.findIndex((dataItem) => dataItem.id === unitId);
+
+        if (index >= 0) {
+          stack.splice(index, 1);
+        } else {
+          console.warn(
+            `can't Remove Unit (id: ${action.payload} as it is not in the Stack)`
+          );
+        }
       }
     },
+
     resetData: () => initialState,
   },
 });
