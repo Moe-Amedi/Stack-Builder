@@ -188,9 +188,9 @@ const StackComponent = (props: any) => {
               <td className="border border-white p-1 text-center align-middle">
                 Food
               </td>
-              <td className="border border-white p-1 text-center align-middle">
+              {/* <td className="border border-white p-1 text-center align-middle">
                 Goods
-              </td>
+              </td> */}
               <td className="border border-white p-1 text-center align-middle">
                 Manpower
               </td>
@@ -200,9 +200,9 @@ const StackComponent = (props: any) => {
               <td className="border border-white p-1 text-center align-middle">
                 Oil
               </td>
-              <td className="border border-white p-1 text-center align-middle">
+              {/* <td className="border border-white p-1 text-center align-middle">
                 Rares
-              </td>
+              </td> */}
             </tr>
           </thead>
           <tbody>
@@ -216,9 +216,9 @@ const StackComponent = (props: any) => {
               <td className="border border-white p-1 text-center align-middle">
                 {cost && cost.food ? cost.food.toFixed(0) : 0}
               </td>
-              <td className="border border-white p-1 text-center align-middle">
+              {/* <td className="border border-white p-1 text-center align-middle">
                 {cost && cost.goods ? cost.goods.toFixed(0) : 0}
-              </td>
+              </td> */}
               <td className="border border-white p-1 text-center align-middle">
                 {cost && cost.manpower ? cost.manpower.toFixed(0) : 0}
               </td>
@@ -228,9 +228,9 @@ const StackComponent = (props: any) => {
               <td className="border border-white p-1 text-center align-middle">
                 {cost && cost.oil ? cost.oil.toFixed(0) : 0}
               </td>
-              <td className="border border-white p-1 text-center align-middle">
+              {/* <td className="border border-white p-1 text-center align-middle">
                 {cost && cost.rares ? cost.rares.toFixed(0) : 0}
-              </td>
+              </td> */}
             </tr>
             <tr>
               <td className="border border-white p-1 text-center align-middle">
@@ -242,9 +242,9 @@ const StackComponent = (props: any) => {
               <td className="border border-white p-1 text-center align-middle">
                 {upkeep && upkeep.food ? upkeep.food.toFixed(0) : 0}
               </td>
-              <td className="border border-white p-1 text-center align-middle">
+              {/* <td className="border border-white p-1 text-center align-middle">
                 {upkeep && upkeep.goods ? upkeep.goods.toFixed(0) : 0}
-              </td>
+              </td> */}
               <td className="border border-white p-1 text-center align-middle">
                 {upkeep && upkeep.manpower ? upkeep.manpower.toFixed(0) : 0}
               </td>
@@ -254,9 +254,9 @@ const StackComponent = (props: any) => {
               <td className="border border-white p-1 text-center align-middle">
                 {upkeep && upkeep.oil ? upkeep.oil.toFixed(0) : 0}
               </td>
-              <td className="border border-white p-1 text-center align-middle">
+              {/* <td className="border border-white p-1 text-center align-middle">
                 {upkeep && upkeep.rares ? upkeep.rares.toFixed(0) : 0}
-              </td>
+              </td> */}
             </tr>
           </tbody>
         </table>

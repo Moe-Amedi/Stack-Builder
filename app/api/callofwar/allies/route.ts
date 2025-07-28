@@ -6,7 +6,7 @@ export async function GET() {
     console.log("database connected");
 
     const unitQuery = `
-      SELECT * FROM cow_units WHERE doctrine = 'Allies';
+      SELECT * FROM cow_units WHERE doctrine = 'Allies' ORDER BY cow_unit_id;
     `;
     const unitData = await client.query(unitQuery);
     // console.log(unitData.rows);

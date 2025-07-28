@@ -2,12 +2,11 @@
 import { RootState } from "./store";
 import { createSelector } from "@reduxjs/toolkit";
 
-const selectStack = (state: RootState) => state.stack.stack;
+const selectStack = (state: RootState) => state.stack.stacks;
 const selectData = (state: RootState) => state.data.data;
 
-export const selectUnitById = (state: RootState, id: number) => {
-  return state.stack.stack.find((unit) => unit.id === id);
-};
-
-export const makeSelectStack = createSelector(selectStack, (stack) => stack);
-export const makeSelectData = createSelector(selectData, (data) => data);
+export const makeSelectStack = createSelector(
+  selectStack,
+  (stack: any) => stack
+);
+export const makeSelectData = createSelector(selectData, (data: any) => data);

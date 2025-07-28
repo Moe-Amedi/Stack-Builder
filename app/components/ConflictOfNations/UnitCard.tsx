@@ -21,7 +21,7 @@ const UnitCard = (props: any) => {
   const [levelNum, setlevelNum] = useState(1);
   const Stacks = useSelector((state: RootState) => state.stack.stacks);
   const Stack = Stacks[stackId];
-  const Unit: any = Stack.find((stack) => stack.id === unitId);
+  const Unit: any = Stack.find((stack: any) => stack.id === unitId);
   const level = Unit.levels.find((lvl: any) => lvl.level.level === levelNum);
   const attack: any = level?.attackData;
   const defense: any = level?.defenseData;
@@ -58,7 +58,7 @@ const UnitCard = (props: any) => {
 
   const handleAmountChange = (direction: any) => {
     let counter = 0;
-    Stack.forEach((s) => {
+    Stack.forEach((s: any) => {
       counter += s.amount;
     });
     switch (direction) {

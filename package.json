@@ -9,7 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@reduxjs/toolkit": "^2.2.2",
+    "@reduxjs/toolkit": "^2.2.7",
+    "@types/redux": "^3.6.0",
     "argon2": "^0.31.2",
     "axios": "^1.6.5",
     "bcrypt": "^5.1.1",
@@ -17,6 +18,8 @@
     "crypto": "^1.0.1",
     "crypto-js": "^4.2.0",
     "dotenv": "^16.4.1",
+    "firebase": "^10.13.1",
+    "firebase-tools": "^13.17.0",
     "mongoose": "^8.0.3",
     "next": "14.0.4",
     "pg": "^8.11.3",

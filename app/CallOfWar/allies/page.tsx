@@ -228,9 +228,9 @@ const Page = () => {
                 <td className="border border-white p-1 text-center align-middle">
                   Food
                 </td>
-                <td className="border border-white p-1 text-center align-middle">
+                {/* <td className="border border-white p-1 text-center align-middle">
                   Goods
-                </td>
+                </td> */}
                 <td className="border border-white p-1 text-center align-middle">
                   Manpower
                 </td>
@@ -240,9 +240,9 @@ const Page = () => {
                 <td className="border border-white p-1 text-center align-middle">
                   Oil
                 </td>
-                <td className="border border-white p-1 text-center align-middle">
+                {/* <td className="border border-white p-1 text-center align-middle">
                   Rares
-                </td>
+                </td> */}
               </tr>
             </thead>
             <tbody>
@@ -256,9 +256,9 @@ const Page = () => {
                 <td className="border border-white p-1 text-center align-middle">
                   {cost && cost.food ? cost.food.toFixed(0) : 0}
                 </td>
-                <td className="border border-white p-1 text-center align-middle">
+                {/* <td className="border border-white p-1 text-center align-middle">
                   {cost && cost.goods ? cost.goods.toFixed(0) : 0}
-                </td>
+                </td> */}
                 <td className="border border-white p-1 text-center align-middle">
                   {cost && cost.manpower ? cost.manpower.toFixed(0) : 0}
                 </td>
@@ -268,9 +268,9 @@ const Page = () => {
                 <td className="border border-white p-1 text-center align-middle">
                   {cost && cost.oil ? cost.oil.toFixed(0) : 0}
                 </td>
-                <td className="border border-white p-1 text-center align-middle">
+                {/* <td className="border border-white p-1 text-center align-middle">
                   {cost && cost.rares ? cost.rares.toFixed(0) : 0}
-                </td>
+                </td> */}
               </tr>
               <tr>
                 <td className="border border-white p-1 text-center align-middle">
@@ -282,9 +282,9 @@ const Page = () => {
                 <td className="border border-white p-1 text-center align-middle">
                   {upkeep && upkeep.food ? upkeep.food.toFixed(0) : 0}
                 </td>
-                <td className="border border-white p-1 text-center align-middle">
+                {/* <td className="border border-white p-1 text-center align-middle">
                   {upkeep && upkeep.goods ? upkeep.goods.toFixed(0) : 0}
-                </td>
+                </td> */}
                 <td className="border border-white p-1 text-center align-middle">
                   {upkeep && upkeep.manpower ? upkeep.manpower.toFixed(0) : 0}
                 </td>
@@ -294,9 +294,9 @@ const Page = () => {
                 <td className="border border-white p-1 text-center align-middle">
                   {upkeep && upkeep.oil ? upkeep.oil.toFixed(0) : 0}
                 </td>
-                <td className="border border-white p-1 text-center align-middle">
+                {/* <td className="border border-white p-1 text-center align-middle">
                   {upkeep && upkeep.rares ? upkeep.rares.toFixed(0) : 0}
-                </td>
+                </td> */}
               </tr>
             </tbody>
           </table>
@@ -314,9 +314,9 @@ const Page = () => {
                 <td className="border border-white p-1 text-center align-middle">
                   Food
                 </td>
-                <td className="border border-white p-1 text-center align-middle">
+                {/* <td className="border border-white p-1 text-center align-middle">
                   Goods
-                </td>
+                </td> */}
                 <td className="border border-white p-1 text-center align-middle">
                   Manpower
                 </td>
@@ -326,9 +326,9 @@ const Page = () => {
                 <td className="border border-white p-1 text-center align-middle">
                   Oil
                 </td>
-                <td className="border border-white p-1 text-center align-middle">
+                {/* <td className="border border-white p-1 text-center align-middle">
                   Rares
-                </td>
+                </td> */}
               </tr>
             </thead>
             <tbody>
@@ -354,7 +354,7 @@ const Page = () => {
                     onChange={(e) => handleInputChange(e, "food")}
                   />
                 </td>
-                <td className="border border-white p-1 text-center align-middle">
+                {/* <td className="border border-white p-1 text-center align-middle">
                   <input
                     type="text"
                     inputMode="numeric"
@@ -362,7 +362,7 @@ const Page = () => {
                     className="input input-bordered w-full h-8 max-w-xs bg-slate-900"
                     onChange={(e) => handleInputChange(e, "goods")}
                   />
-                </td>
+                </td> */}
                 <td className="border border-white p-1 text-center align-middle">
                   <input
                     type="text"
@@ -390,7 +390,7 @@ const Page = () => {
                     onChange={(e) => handleInputChange(e, "oil")}
                   />
                 </td>
-                <td className="border border-white p-1 text-center align-middle">
+                {/* <td className="border border-white p-1 text-center align-middle">
                   <input
                     type="text"
                     inputMode="numeric"
@@ -398,7 +398,7 @@ const Page = () => {
                     className="input input-bordered w-full h-8 max-w-xs bg-slate-900"
                     onChange={(e) => handleInputChange(e, "rares")}
                   />
-                </td>
+                </td> */}
               </tr>
               <tr>
                 <td className="border border-white p-1 text-center align-middle">
@@ -410,9 +410,9 @@ const Page = () => {
                 <td className="border border-white p-1 text-center align-middle">
                   {formatTime(prodTime.food) || 0}
                 </td>
-                <td className="border border-white p-1 text-center align-middle">
+                {/* <td className="border border-white p-1 text-center align-middle">
                   {formatTime(prodTime.goods) || 0}
-                </td>
+                </td> */}
                 <td className="border border-white p-1 text-center align-middle">
                   {formatTime(prodTime.manpower) || 0}
                 </td>
@@ -422,9 +422,9 @@ const Page = () => {
                 <td className="border border-white p-1 text-center align-middle">
                   {formatTime(prodTime.oil) || 0}
                 </td>
-                <td className="border border-white p-1 text-center align-middle">
+                {/* <td className="border border-white p-1 text-center align-middle">
                   {formatTime(prodTime.rares) || 0}
-                </td>
+                </td> */}
               </tr>
             </tbody>
           </table>
